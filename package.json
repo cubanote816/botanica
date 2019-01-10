@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "serve:mock": "vue-cli-service serve --mode mock-api"
   },
   "dependencies": {
     "@mdi/font": "^3.3.92",

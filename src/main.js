@@ -5,8 +5,11 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import '@mdi/font/css/materialdesignicons.css'
+import formLoading from 'vue2-form-loading'
 
 Vue.config.productionTip = false
+
+Vue.use(formLoading)
 
 
 new Vue({

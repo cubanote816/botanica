@@ -35,7 +35,23 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "shop" */ './views/Shop.vue')
+      component: () => import(/* webpackChunkName: "shop" */ './views/shop/Shop.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "login" */ './views/auth/Login.vue')
+    },
+    {
+      path: '/singup',
+      name: 'singup',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "singup" */ './views/auth/Singup.vue')
     }
   ]
 })

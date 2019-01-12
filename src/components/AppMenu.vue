@@ -43,8 +43,7 @@ export default {
         { icon: "mdi-shopify", title: "Shop", link: "/shop" },
         { icon: "mdi-blogger", title: "Blog", link: "/blog" },
         { icon: "mdi-contacts", title: "Contact", link: "/contact" },
-        { icon: "mdi-account-circle", title: "Signup", link: "/signup" },
-        { icon: "mdi-login", title: "Login", link: "/Login" },
+        { icon: "mdi-login", title: "Login", link: "/login" },
         // {
         //   icon: "shopping-cart",
         //   title: this.cartProducts.length,

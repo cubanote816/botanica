@@ -1,22 +1,24 @@
 <template>
-  <div>
-    <v-toolbar class='primary' dark has-shadow>
-      <v-toolbar-side-icon @click.stop='sideNav = !sideNav' class='hidden-sm-and-up'></v-toolbar-side-icon>
+  <nav>
+    <v-toolbar color="yellow accent-3" has-shadow app>
+      <v-toolbar-side-icon @click.stop="sideNav = !sideNav" class="hidden-sm-and-up"></v-toolbar-side-icon>
       <v-toolbar-title>
-        <router-link to='/' tag='span' style='...'>Botanica El Poder de Orula</router-link>
+        <router-link to="/" tag="span" class="pointer" style="...">Botanica <span class="green--text">El Poder de Orula</span></router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-text-field hide-details prepend-icon='search' single-line></v-text-field>
-      <v-toolbar-items class='hidden-xs-only'>
-        <v-btn flat v-for='item in menuItems' :key='item.title' :to='item.link'>
+      <search></search>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn flat v-for="item in menuItems" :key="item.title" :to="item.link">
           <v-icon left dark>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
+        <v-btn flat @click="showLoginModal" to="" v-if="!isUserLoggedIn">Login</v-btn>
+      <v-btn flat @click="dialog2 = true">Sign up</v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <v-navigation-drawer v-model='sideNav' temporary class='hidden-sm-and-up'>
+    <v-navigation-drawer v-model="sideNav" app temporary class="hidden-sm-and-up">
       <v-list>
-        <v-list-tile v-for='item in menuItems' :key='item.title' :to='item.link'>
+        <v-list-tile v-for="item in menuItems" :key="item.title" :to="item.link">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -25,30 +27,52 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-  </div>
+  </nav>
 </template>
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
+import Search from "./search/Search";
 export default {
   name: "AppMenu",
   data() {
     return {
       sideNav: false,
-      cartValue: 0
-    }; 
+      loginDialog: false
+    };
   },
-  computed: {
+
+  components: {
+    Search
+  },
+computed: {
+		isUserLoggedIn () {
+			return this.$store.getters.isUserLoggedIn;
+		},
+		getUserName () {
+			let name = this.$store.getters.getUserName;
+			
+			if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+    },
+    ...mapGetters(["productsAdded", "productsAddedToFavourite", "cartProducts"]),
+    numProductsAdded() {
+      return this.cartProducts.length;
+    },
+    numProductsFav() {
+      return this.productsAddedToFavourite.length;
+    },
     menuItems() {
       let menuItems = [
         { icon: "mdi-shopify", title: "Shop", link: "/shop" },
         { icon: "mdi-blogger", title: "Blog", link: "/blog" },
         { icon: "mdi-contacts", title: "Contact", link: "/contact" },
-        { icon: "mdi-login", title: "Login", link: "/login" },
-        // {
-        //   icon: "shopping-cart",
-        //   title: this.cartProducts.length,
-        //   link: "/cart"
-        // }
+        { icon: (this.numProductsFav) ? "mdi-heart" : "mdi-heart-outline", title: this.numProductsFav, link: "/wishlist" },
+        { icon: (this.numProductsAdded) ? "mdi-cart" : "mdi-cart-outline", title: this.numProductsAdded, link: "/cart" },
+        // { icon: "mdi-account-plus-outline", title: "Sign up", link: "/signup" },
+        // { icon: "mdi-account-tie", title: "Login", link: "/login" }
       ];
       if (this.userIsAuthenticated) {
         menuItems = [
@@ -63,5 +87,28 @@ export default {
       return false;
     }
   },
-}
+  methods: {
+    showLoginModal () {
+			this.$store.commit('showLoginModal', true);
+    },
+    ...mapMutations(["SET_CART_PRODUCTS"]),
+
+    getLocalProducts() {
+      const products = JSON.parse(localStorage.getItem("iki-cart"));
+
+      if (products) {
+        this.SET_CART_PRODUCTS(products);
+      }
+    },
+  },
+  created() {
+    this.getLocalProducts();
+  }
+};
 </script>
+<style scoped>
+.pointer{
+  cursor: pointer;
+}
+</style>
+

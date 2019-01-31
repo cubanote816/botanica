@@ -1,0 +1,473 @@
+import _ from "lodash";
+
+const Items = [
+  {
+    id: 1,
+    productName: "Eleggua",
+    productImage: "/products/statuettes/Eleggua1.jpg",
+    productDescription: "Sit amet conse ctetuolore magna aliqua. Laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.",
+    productPrice: 99.99,
+    productCategory: "Estatuillas Aficanas",
+    productSeller: 'Jessie Wang',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 8,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 2,
+    productName: 'Diosa del mar',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.',
+    productImage: '/products/statuettes/mar1.jpg',
+    productPrice: 199.99,
+    productCategory: "Estatuillas Aficanas",
+    productSeller: 'Jessie Wang',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 56,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 3,
+    productName: 'Fransisca',
+    productDescription: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.',
+    productImage: '/products/statuettes/francisca1.jpg',
+    productPrice: 99.99,
+    productCategory: "Estatuillas Aficanas",
+    productSeller: 'Jessie Joi',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 65,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 4,
+    productName: 'Orula',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim a',
+    productImage: '/products/statuettes/orula1.jpg',
+    productPrice: 489.99,
+    productCategory: "Estatuillas Aficanas",
+    productSeller: 'Jessie Ruff',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 1,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 5,
+    productName: 'Oggun',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/statuettes/oggun1.jpg',
+    productPrice: 199.99,
+    productCategory: "Estatuillas Aficanas",
+    productSeller: 'Jessie Wang',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 700,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 6,
+    productName: 'Ide elegua',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/joyeria/ide-eleggua.jpg',
+    productPrice: 299.99,
+    productCategory: "Joyeria",
+    productSeller: 'Jessie Wang',
+    ratings: 4,
+    reviews: 65,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 7,
+    productName: 'Ojitos de santa lucia',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/joyeria/ojitos.jpg',
+    productPrice: 299.99,
+    productCategory: "Joyeria",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 8,
+    productName: 'ide de orula',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/joyeria/ojitos.jpg',
+    productPrice: 299.99,
+    productCategory: "Joyeria",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 9,
+    productName: 'Pulso de moneda',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/joyeria/ojitos.jpg',
+    productPrice: 299.99,
+    productCategory: "Joyeria",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 10,
+    productName: 'Pulsa de obatala en plata',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/joyeria/ojitos.jpg',
+    productPrice: 299.99,
+    productCategory: "Joyeria",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 11,
+    productName: 'Collar de orula',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/ifa/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "ifa",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 12,
+    productName: 'iruke de orula',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/ifa/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "ifa",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 13,
+    productName: 'ide de orula',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/ifa/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "ifa",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 14,
+    productName: 'ecuele de coco',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/ifa/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "ifa",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 15,
+    productName: 'Cofre',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/ifa/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "ifa",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 16,
+    productName: 'Brocha de orula',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/ifa/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "ifa",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 17,
+    productName: 'Iyerosun',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/ifa/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "ifa",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 18,
+    productName: 'Pescado ahumado',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/ifa/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "ifa",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 19,
+    productName: 'ecuela de semillas',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/ifa/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "ifa",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 20,
+    productName: 'Tratado de ifa 1',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/books/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "Libros",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 21,
+    productName: 'Tratado de ifa 2',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/books/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "Libros",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 22,
+    productName: 'Tratado de ifa 3',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/books/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "Libros",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 23,
+    productName: 'Tratado de ifa 4',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/ifa/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "Libros",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 24,
+    productName: 'Tratado de ifa 5',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/books/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "Libros",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+  {
+    id: 25,
+    productName: 'Tratado de ifa 6',
+    productDescription: 'Sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    productImage: '/products/books/ifa.jpg',
+    productPrice: 299.99,
+    productCategory: "Libros",
+    productSeller: 'Totti',
+    ratings: 3,
+    reviews: 5,
+    unitSold: 4,
+    isAddedToCart: false,
+    isAddedBtn: false,
+    isFavourite: false,
+    quantity: 1,
+    createdAt: new Date().toLocaleDateString()
+  },
+];
+
+const getSimilarProduct = (productCategory) => {
+  return (productCategory === undefined) ? Items[0] : Items.find(x => x.productCategory === productCategory);
+  // return _.shuffle(Items).slice(0, 5);
+};
+
+const getProductById = (id) => {
+  return (id === undefined) ? Items[0] : Items.find(x => x.id === id);
+};
+
+const getProduct = (limit) => {
+  return (limit) ? Items.slice(0, limit) : Items;
+};
+
+// const getProduct = () => {
+
+//   // const grouped = _.groupBy(Items, "productCategory")
+//   // const cat = Object.keys(grouped)
+
+//   // cat.forEach(key => {
+//   //   console.log(key)
+//   //   const productInThisCategory = grouped[key]
+//   //   productInThisCategory.forEach(product => {
+//   //     console.log(product.productName)
+//   //   })
+//   // })
+//   // return 'ok';
+//   let grouped = _.mapValues(_.groupBy(Items, 'productCategory'),
+//     clist => clist.map(cat => _.omit(cat, 'productCategory')));
+//   console.log(grouped);
+//   return grouped;
+// };
+
+const getTopSellingProducts = () => {
+  return Items.sort((a, b) => b.unitSold - a.unitSold).slice(0, 8);
+};
+
+export {
+  Items,
+  getProduct,
+  getProductById,
+  getTopSellingProducts,
+  getSimilarProduct
+};

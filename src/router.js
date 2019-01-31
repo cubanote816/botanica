@@ -38,6 +38,45 @@ export default new Router({
       component: () => import(/* webpackChunkName: "shop" */ './views/shop/Shop.vue')
     },
     {
+      path: '/shop/products',
+      name: "products",
+      component: () => import(/* webpackChunkName: "products" */ "./views/products/Products.vue")
+    },
+    {
+      path: '/shop/product/:id',
+      name: "productDetails",
+      component: () => import(/* webpackChunkName: "productDetails" */ "./views/products/Detail.vue")
+    },
+    // {
+    //   path: '/products/:id',
+    //   name: 'productDetails',
+    //   component: () => import('./components/products/ProductDetail.vue'),
+    // },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('./components/products/cart/CartProducts.vue'),
+      // beforeEnter: (to, from, next) => {
+      //   console.log("From", from)
+      //   console.log("To", to)
+      //   if (isLoggedIn()) {
+      //     next();
+      //   } else {
+      //     next({
+      //       name: 'login',
+      //       query: {
+      //         from: to.name
+      //       }
+      //     })
+      //   }
+      // }
+    }, 
+    {
+      path: '/wishlist',
+      name: 'wishlist-container-component',
+      component: () => import(/* webpackChunkName: "wishlist" */ './components/user/WishlistContainer.vue')
+    },
+    {
       path: '/login',
       name: 'login',
       // route level code-splitting

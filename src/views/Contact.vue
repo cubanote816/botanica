@@ -1,6 +1,6 @@
 <template>
-
-    <section>
+  <section>
+    <template v-if="flagSearch === false">
       <v-container grid-list-xl>
         <v-layout row wrap justify-center class="my-5">
           <v-flex xs12 sm7>
@@ -89,16 +89,21 @@
           </v-flex>
         </v-layout>
       </v-container>
-    </section>
+    </template>
+    <template v-else>
+      <search-result></search-result>
+    </template>
+  </section>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email, maxLength } from "vuelidate/lib/validators";
+import SearchResult from "@/components/search/SearchResult";
 import { mapActions, mapState } from "vuex";
 
 export default {
-  name: "home",
+  name: "contact",
   mixins: [validationMixin],
   validations: {
     form: {
@@ -110,6 +115,7 @@ export default {
   },
   data() {
     return {
+      flagSearch: false,
       form: {
         name: "",
         email: "",
@@ -117,10 +123,21 @@ export default {
         message: ""
       },
 
-      errors: {}
-    }
+      errors: {},
+
+    };
+  },
+  components: {
+    SearchResult
   },
   computed: {
+     productsList() {
+      if (this.$store.state.userInfo.hasSearched) {
+        this.flagSearch = true;
+      }else {
+        this.flagSearch = false;
+      }
+    },
     nameErrors() {
       const errors = [];
       if (!this.$v.form.name.$dirty) return errors;
